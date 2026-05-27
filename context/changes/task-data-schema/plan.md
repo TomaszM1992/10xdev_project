@@ -315,25 +315,25 @@ This is the first migration. `npx supabase db reset` is the correct apply comman
 
 #### Automated
 
-- [x] 1.1 `npx supabase status` exits 0 and prints API URL and anon key
+- [x] 1.1 `npx supabase status` exits 0 and prints API URL and anon key — 05e2b23
 
 #### Manual
 
-- [x] 1.2 `npm run dev` starts without "Supabase is not configured" banner
+- [x] 1.2 `npm run dev` starts without "Supabase is not configured" banner — 05e2b23
 
 ### Phase 2: Schema Migration and TypeScript Types
 
 #### Automated
 
-- [ ] 2.1 `npx supabase db reset` exits 0 with no SQL errors
-- [ ] 2.2 `npm run lint` passes
-- [ ] 2.3 `npm run build` passes
+- [x] 2.1 `npx supabase db reset` exits 0 with no SQL errors
+- [x] 2.2 `npm run lint` passes
+- [x] 2.3 `npm run build` passes
 
 #### Manual
 
-- [ ] 2.4 Supabase Studio shows all 3 tables with correct columns and RLS enabled
-- [ ] 2.5 `task_status` enum visible in Studio under Database → Types
-- [ ] 2.6 All 12 RLS policies (4 per table) appear in each table's RLS section
+- [x] 2.4 Supabase Studio shows all 3 tables with correct columns and RLS enabled
+- [x] 2.5 `task_status` enum visible in Studio under Database → Types
+- [x] 2.6 All 12 RLS policies (4 per table) appear in each table's RLS section
 
 ### Phase 3: Auth Smoke Test
 
