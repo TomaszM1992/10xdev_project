@@ -325,22 +325,22 @@ This is the first migration. `npx supabase db reset` is the correct apply comman
 
 #### Automated
 
-- [x] 2.1 `npx supabase db reset` exits 0 with no SQL errors
-- [x] 2.2 `npm run lint` passes
-- [x] 2.3 `npm run build` passes
+- [x] 2.1 `npx supabase db reset` exits 0 with no SQL errors — e1377ef
+- [x] 2.2 `npm run lint` passes — e1377ef
+- [x] 2.3 `npm run build` passes — e1377ef
 
 #### Manual
 
-- [x] 2.4 Supabase Studio shows all 3 tables with correct columns and RLS enabled
-- [x] 2.5 `task_status` enum visible in Studio under Database → Types
-- [x] 2.6 All 12 RLS policies (4 per table) appear in each table's RLS section
+- [x] 2.4 Supabase Studio shows all 3 tables with correct columns and RLS enabled — e1377ef
+- [x] 2.5 `task_status` enum visible in Studio under Database → Types — e1377ef
+- [x] 2.6 All 12 RLS policies (4 per table) appear in each table's RLS section — e1377ef
 
 ### Phase 3: Auth Smoke Test
 
 #### Manual
 
-- [ ] 3.1 Sign up a new account at `/auth/signup` → confirmation page shows "Registration successful"
-- [ ] 3.2 Sign in with same credentials → redirected to `/`
-- [ ] 3.3 Navigate to `/dashboard` → page loads and displays user email
-- [ ] 3.4 Sign out → redirected to `/`
-- [ ] 3.5 Test user visible in Supabase Studio under Authentication → Users
+- [x] 3.1 Sign up a new account at `/auth/signup` → confirmation page shows "Registration successful"
+- [x] 3.2 Sign in with same credentials → redirected to `/`
+- [x] 3.3 Navigate to `/dashboard` → page loads and displays user email
+- [x] 3.4 Sign out → redirected to `/`
+- [x] 3.5 Test user visible in Supabase Studio under Authentication → Users
