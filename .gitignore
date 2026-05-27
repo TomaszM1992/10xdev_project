@@ -29,5 +29,4 @@ pnpm-debug.log*
 
 # ai skills
 .claude/skills
-.claude/prompts
 .claude/.10x-cli-manifest.json
