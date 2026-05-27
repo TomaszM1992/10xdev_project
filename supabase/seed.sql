@@ -1,0 +1,2 @@
+-- Seed data for local development.
+-- Intentionally empty for F-01. Add test fixtures here when needed.
