@@ -108,7 +108,7 @@ The fourth failure revealed the CI gap: the GitHub Actions workflow had been tar
 
 | Risk | Source | Likelihood | Impact | Mitigation |
 |---|---|---|---|---|
-| Pages vs Workers ambiguity causes deploy to wrong product | Unknown unknowns | H | M | Inspect `wrangler.jsonc` for `main` (Workers) vs `pages_build_output_dir` (Pages) field before first deploy; align CLAUDE.md and tech-stack.md |
+| ~~Pages vs Workers ambiguity causes deploy to wrong product~~ | ~~Unknown unknowns~~ | — | — | **Resolved 2026-05-25**: Workers mode confirmed — `wrangler.jsonc` has `main` field; deploy command is `npx wrangler deploy`; `tech-stack.md` updated to `cloudflare-workers`. |
 | CJS dependency breaks build after npm update | Devil's advocate | M | M | Run `npm ls --why <package>` when build fails; add Vite `noExternal` for known CJS packages; pin shadcn/ui and Supabase to minor versions and review changelogs before upgrading |
 | 10ms CPU limit exceeded on daily view | Devil's advocate / Pre-mortem | M | H | Profile sort+filter logic in Wrangler dev mode; move heavy computation server-side to Supabase query (ORDER BY in SQL) rather than JS; upgrade to paid Workers tier ($5/month) if needed |
 | React hydration mismatch from Auto Minify | Pre-mortem | M | M | Disable Auto Minify (HTML, CSS, JS) in Cloudflare dashboard immediately on zone creation; document this manual step in deploy plan |

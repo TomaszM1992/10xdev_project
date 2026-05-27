@@ -1,5 +1,5 @@
 ---
-project: "# TODO: project — see Open Questions"
+project: "Todoer"
 version: 1
 status: draft
 created: 2026-05-18
@@ -132,4 +132,4 @@ Single user, email and password login. Flat user model — no roles, no sharing,
 
 ## Open Questions
 
-1. **What is the project name?** — TBD by user. Block: no (placeholder in frontmatter). Working title from notes: "TODO App."
+_(none)_
