@@ -339,8 +339,8 @@ This is the first migration. `npx supabase db reset` is the correct apply comman
 
 #### Manual
 
-- [x] 3.1 Sign up a new account at `/auth/signup` → confirmation page shows "Registration successful"
-- [x] 3.2 Sign in with same credentials → redirected to `/`
-- [x] 3.3 Navigate to `/dashboard` → page loads and displays user email
-- [x] 3.4 Sign out → redirected to `/`
-- [x] 3.5 Test user visible in Supabase Studio under Authentication → Users
+- [x] 3.1 Sign up a new account at `/auth/signup` → confirmation page shows "Registration successful" — bedae2f
+- [x] 3.2 Sign in with same credentials → redirected to `/` — bedae2f
+- [x] 3.3 Navigate to `/dashboard` → page loads and displays user email — bedae2f
+- [x] 3.4 Sign out → redirected to `/` — bedae2f
+- [x] 3.5 Test user visible in Supabase Studio under Authentication → Users — bedae2f
