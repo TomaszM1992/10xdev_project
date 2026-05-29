@@ -314,14 +314,14 @@ Two parallel Supabase queries via `Promise.all` minimise SSR latency. `tasks_use
 
 #### Automated
 
-- [x] 3.1 npm run lint — clean
-- [x] 3.2 npm run build — clean
+- [x] 3.1 npm run lint — clean — 6c3a8fc
+- [x] 3.2 npm run build — clean — 6c3a8fc
 
 #### Manual
 
-- [x] 3.3 Complete/dismiss removes task immediately with Sonner undo toast
-- [x] 3.4 Undo within 5 seconds restores the task; no PATCH is fired
-- [x] 3.5 After 5 seconds task remains removed; status persists after reload
-- [x] 3.6 Changing available hours re-filters task list immediately
-- [x] 3.7 Changed hours persist after page reload
-- [x] 3.8 Completed/dismissed tasks do not reappear on next page load
+- [x] 3.3 Complete/dismiss removes task immediately with Sonner undo toast — 6c3a8fc
+- [x] 3.4 Undo within 5 seconds restores the task; no PATCH is fired — 6c3a8fc
+- [x] 3.5 After 5 seconds task remains removed; status persists after reload — 6c3a8fc
+- [x] 3.6 Changing available hours re-filters task list immediately — 6c3a8fc
+- [x] 3.7 Changed hours persist after page reload — 6c3a8fc
+- [x] 3.8 Completed/dismissed tasks do not reappear on next page load — 6c3a8fc
