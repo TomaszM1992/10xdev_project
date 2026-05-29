@@ -112,7 +112,12 @@ export const DELETE: APIRoute = async (context) => {
     return Response.json({ error: "Missing task id" }, { status: 400 });
   }
 
-  const { data: existing, error: selectError } = await supabase.from("tasks").select("id").eq("id", id).maybeSingle();
+  const { data: existing, error: selectError } = await supabase
+    .from("tasks")
+    .select("id")
+    .eq("id", id)
+    .eq("user_id", user.id)
+    .maybeSingle();
 
   if (selectError) {
     return Response.json({ error: "Failed to fetch task" }, { status: 500 });
@@ -122,7 +127,7 @@ export const DELETE: APIRoute = async (context) => {
     return Response.json({ error: "Task not found" }, { status: 404 });
   }
 
-  const { error: deleteError } = await supabase.from("tasks").delete().eq("id", id);
+  const { error: deleteError } = await supabase.from("tasks").delete().eq("id", id).eq("user_id", user.id);
 
   if (deleteError) {
     return Response.json({ error: "Failed to delete task" }, { status: 500 });
