@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { CreateTaskSchema, UpdateTaskSchema } from "@/lib/schemas";
+import { CreateTaskSchema, UpdateTaskSchema, UpdateSettingsSchema } from "@/lib/schemas";
 
 const validCreate = {
   name: "Write tests",
@@ -58,5 +58,47 @@ describe("UpdateTaskSchema", () => {
 
   it("rejects priority 0", () => {
     expect(UpdateTaskSchema.safeParse({ priority: 0 }).success).toBe(false);
+  });
+
+  it("accepts status pending", () => {
+    expect(UpdateTaskSchema.safeParse({ status: "pending" }).success).toBe(true);
+  });
+
+  it("accepts status complete", () => {
+    expect(UpdateTaskSchema.safeParse({ status: "complete" }).success).toBe(true);
+  });
+
+  it("accepts status dismissed", () => {
+    expect(UpdateTaskSchema.safeParse({ status: "dismissed" }).success).toBe(true);
+  });
+
+  it("rejects invalid status value", () => {
+    expect(UpdateTaskSchema.safeParse({ status: "done" }).success).toBe(false);
+  });
+
+  it("accepts omitted status (optional)", () => {
+    expect(UpdateTaskSchema.safeParse({ name: "No status" }).success).toBe(true);
+  });
+});
+
+describe("UpdateSettingsSchema", () => {
+  it("accepts a valid available_hours value", () => {
+    expect(UpdateSettingsSchema.safeParse({ available_hours: 6.5 }).success).toBe(true);
+  });
+
+  it("accepts exactly 24 hours", () => {
+    expect(UpdateSettingsSchema.safeParse({ available_hours: 24 }).success).toBe(true);
+  });
+
+  it("rejects 0 hours (not positive)", () => {
+    expect(UpdateSettingsSchema.safeParse({ available_hours: 0 }).success).toBe(false);
+  });
+
+  it("rejects 24.1 hours (exceeds max)", () => {
+    expect(UpdateSettingsSchema.safeParse({ available_hours: 24.1 }).success).toBe(false);
+  });
+
+  it("rejects negative hours", () => {
+    expect(UpdateSettingsSchema.safeParse({ available_hours: -1 }).success).toBe(false);
   });
 });
