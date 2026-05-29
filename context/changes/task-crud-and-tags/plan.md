@@ -418,26 +418,26 @@ The task list query uses `tasks_user_id_idx ON tasks(user_id)` (F-01) for the RL
 
 #### Automated
 
-- [x] 3.1 `npm run lint` — no lint or type errors in component files
-- [x] 3.2 `npm run build` — build succeeds
+- [x] 3.1 `npm run lint` — no lint or type errors in component files — 4b6cac4
+- [x] 3.2 `npm run build` — build succeeds — 4b6cac4
 
 #### Manual
 
-- [ ] 3.3 `TaskForm` renders with all fields and priority buttons
-- [ ] 3.4 `TagInput` adds chips on Enter; × removes; 6th tag is rejected
+- [x] 3.3 `TaskForm` renders with all fields and priority buttons
+- [x] 3.4 `TagInput` adds chips on Enter; × removes; 6th tag is rejected
 
 ### Phase 4: Astro Pages and Navigation
 
 #### Automated
 
-- [ ] 4.1 `npm run lint` — no lint or type errors
-- [ ] 4.2 `npm run build` — build succeeds with all new pages
+- [x] 4.1 `npm run lint` — no lint or type errors
+- [x] 4.2 `npm run build` — build succeeds with all new pages
 
 #### Manual
 
-- [ ] 4.3 Unauthenticated `/tasks` → redirected to sign-in
-- [ ] 4.4 Full create-edit-delete flow works with toasts
-- [ ] 4.5 Delete removes task from list without page reload
-- [ ] 4.6 Edit page pre-populates all fields including tags
-- [ ] 4.7 Unauthenticated `/tasks/new` → redirected to sign-in
-- [ ] 4.8 Topbar shows "Tasks" link for authenticated users
+- [x] 4.3 Unauthenticated `/tasks` → redirected to sign-in
+- [x] 4.4 Full create-edit-delete flow works with toasts
+- [x] 4.5 Delete removes task from list without page reload
+- [x] 4.6 Edit page pre-populates all fields including tags
+- [x] 4.7 Unauthenticated `/tasks/new` → redirected to sign-in
+- [x] 4.8 Topbar shows "Tasks" link for authenticated users
