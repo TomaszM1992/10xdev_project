@@ -389,30 +389,30 @@ The task list query uses `tasks_user_id_idx ON tasks(user_id)` (F-01) for the RL
 
 #### Automated
 
-- [x] 1.1 `npm test` — all schema unit tests pass
-- [x] 1.2 `npm run lint` — no lint errors in new files
-- [x] 1.3 `npm run build` — build succeeds
+- [x] 1.1 `npm test` — all schema unit tests pass — eb3c86d
+- [x] 1.2 `npm run lint` — no lint errors in new files — eb3c86d
+- [x] 1.3 `npm run build` — build succeeds — eb3c86d
 
 #### Manual
 
-- [x] 1.4 Toast smoke test — Toaster renders in browser
+- [x] 1.4 Toast smoke test — Toaster renders in browser — eb3c86d
 
 ### Phase 2: API Routes
 
 #### Automated
 
-- [ ] 2.1 `npm run lint` — no lint errors
-- [ ] 2.2 `npm run build` — no type errors
+- [x] 2.1 `npm run lint` — no lint errors
+- [x] 2.2 `npm run build` — no type errors
 
 #### Manual
 
-- [ ] 2.3 `POST /api/tasks` with valid body + session → 201 with task + tags
-- [ ] 2.4 `POST /api/tasks` without session → 401
-- [ ] 2.5 `POST /api/tasks` with missing `name` → 400 with validation error
-- [ ] 2.6 `PATCH /api/tasks/[id]` with updated fields → 200 with updated task
-- [ ] 2.7 `PATCH /api/tasks/[id]` with new tags list → 200; tags replaced
-- [ ] 2.8 `DELETE /api/tasks/[id]` → 204; task gone
-- [ ] 2.9 `DELETE /api/tasks/[id]` for another user's task → 404
+- [x] 2.3 `POST /api/tasks` with valid body + session → 201 with task + tags
+- [x] 2.4 `POST /api/tasks` without session → 401
+- [x] 2.5 `POST /api/tasks` with missing `name` → 400 with validation error
+- [x] 2.6 `PATCH /api/tasks/[id]` with updated fields → 200 with updated task
+- [x] 2.7 `PATCH /api/tasks/[id]` with new tags list → 200; tags replaced
+- [x] 2.8 `DELETE /api/tasks/[id]` → 204; task gone
+- [x] 2.9 `DELETE /api/tasks/[id]` for another user's task → 404
 
 ### Phase 3: React Components
 
