@@ -282,33 +282,33 @@ Two parallel Supabase queries via `Promise.all` minimise SSR latency. `tasks_use
 
 #### Automated
 
-- [x] 1.1 npm test — existing + new schema unit tests pass
-- [x] 1.2 npm run lint — clean
-- [x] 1.3 npm run build — clean
+- [x] 1.1 npm test — existing + new schema unit tests pass — 69f7334
+- [x] 1.2 npm run lint — clean — 69f7334
+- [x] 1.3 npm run build — clean — 69f7334
 
 #### Manual
 
-- [x] 1.4 PATCH /api/tasks/{id} with status complete returns updated task
-- [x] 1.5 GET /api/settings returns available_hours 8 for new user
-- [x] 1.6 PATCH /api/settings persists; subsequent GET returns updated value
-- [x] 1.7 /daily without auth redirects to /auth/signin
-- [x] 1.8 Topbar shows Daily link for authenticated users
+- [x] 1.4 PATCH /api/tasks/{id} with status complete returns updated task — 69f7334
+- [x] 1.5 GET /api/settings returns available_hours 8 for new user — 69f7334
+- [x] 1.6 PATCH /api/settings persists; subsequent GET returns updated value — 69f7334
+- [x] 1.7 /daily without auth redirects to /auth/signin — 69f7334
+- [x] 1.8 Topbar shows Daily link for authenticated users — 69f7334
 
 ### Phase 2: Daily View SSR Page
 
 #### Automated
 
-- [ ] 2.1 npm run lint — clean
-- [ ] 2.2 npm run build — clean
+- [x] 2.1 npm run lint — clean
+- [x] 2.2 npm run build — clean
 
 #### Manual
 
-- [ ] 2.3 /daily shows today's tasks in correct priority x time order
-- [ ] 2.4 Tasks beyond available-hours budget are not shown
-- [ ] 2.5 Overdue tasks appear above today's tasks with distinct visual treatment
-- [ ] 2.6 /daily?date=YYYY-MM-DD shows tasks for that date
-- [ ] 2.7 Prev/next links navigate to adjacent dates
-- [ ] 2.8 Empty state renders when no tasks exist for the selected date
+- [x] 2.3 /daily shows today's tasks in correct priority x time order
+- [x] 2.4 Tasks beyond available-hours budget are not shown
+- [x] 2.5 Overdue tasks appear above today's tasks with distinct visual treatment
+- [x] 2.6 /daily?date=YYYY-MM-DD shows tasks for that date
+- [x] 2.7 Prev/next links navigate to adjacent dates
+- [x] 2.8 Empty state renders when no tasks exist for the selected date
 
 ### Phase 3: React Island — Actions and Settings Editor
 

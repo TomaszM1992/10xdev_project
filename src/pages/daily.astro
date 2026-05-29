@@ -1,0 +1,104 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Topbar from "@/components/Topbar.astro";
+import Banner from "@/components/Banner.astro";
+import { DailyView } from "@/components/daily/DailyView";
+import { createClient } from "@/lib/supabase";
+import type { TaskWithTags } from "@/types";
+
+const supabase = createClient(Astro.request.headers, Astro.cookies);
+
+// Format a Date using local time components to avoid UTC-offset day shifts
+function localISO(d: Date) {
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
+// Parse and validate ?date= parameter; default to local today
+const rawDate = Astro.url.searchParams.get("date");
+const date = rawDate !== null && /^\d{4}-\d{2}-\d{2}$/.test(rawDate) ? rawDate : localISO(new Date());
+
+// Compute prev/next dates — T00:00:00 creates midnight in local time; use localISO to format back
+const prevD = new Date(date + "T00:00:00");
+prevD.setDate(prevD.getDate() - 1);
+const nextD = new Date(date + "T00:00:00");
+nextD.setDate(nextD.getDate() + 1);
+const prevDate = localISO(prevD);
+const nextDate = localISO(nextD);
+
+// Overdue = pending tasks whose due date is before real today, regardless of which date is being viewed.
+// Capping at realToday prevents future-date navigation from treating upcoming tasks as overdue.
+const realToday = localISO(new Date());
+const overdueThreshold = date > realToday ? realToday : date;
+
+let overdueTasks: TaskWithTags[] = [];
+let todayTasks: TaskWithTags[] = [];
+let availableHours = 8;
+let serviceUnavailable = false;
+
+if (supabase) {
+  const [settingsResult, overdueResult, todayResult] = await Promise.all([
+    supabase.from("user_settings").select("available_hours").maybeSingle(),
+    supabase
+      .from("tasks")
+      .select("*, task_tags(*)")
+      .eq("status", "pending")
+      .lt("target_date", overdueThreshold)
+      .order("priority", { ascending: true })
+      .order("time_estimate_minutes", { ascending: true }),
+    supabase
+      .from("tasks")
+      .select("*, task_tags(*)")
+      .eq("status", "pending")
+      .eq("target_date", date)
+      .order("priority", { ascending: true })
+      .order("time_estimate_minutes", { ascending: true }),
+  ]);
+
+  availableHours = (settingsResult.data?.available_hours as number | null | undefined) ?? 8;
+  overdueTasks = (overdueResult.data ?? []) as TaskWithTags[];
+  todayTasks = (todayResult.data ?? []) as TaskWithTags[];
+} else {
+  serviceUnavailable = true;
+}
+---
+
+<Layout title="Daily Tasks">
+  <div class="bg-cosmic min-h-screen p-4">
+    <div class="mx-auto max-w-2xl">
+      <Topbar />
+      {
+        serviceUnavailable && (
+          <Banner variant="error">Service is temporarily unavailable. Check your environment configuration.</Banner>
+        )
+      }
+      <div class="mt-4 flex items-center justify-between">
+        <h1 class="text-2xl font-bold text-white">
+          Daily — <span class="text-blue-200">{date}</span>
+        </h1>
+        <div class="flex items-center gap-2">
+          <a
+            href={`/daily?date=${prevDate}`}
+            class="rounded-lg border border-white/20 bg-white/5 px-3 py-1.5 text-sm text-white/80 transition-colors hover:bg-white/10"
+          >
+            ← Prev
+          </a>
+          <a
+            href={`/daily?date=${nextDate}`}
+            class="rounded-lg border border-white/20 bg-white/5 px-3 py-1.5 text-sm text-white/80 transition-colors hover:bg-white/10"
+          >
+            Next →
+          </a>
+        </div>
+      </div>
+      <div class="mt-6">
+        <DailyView
+          initialOverdueTasks={overdueTasks}
+          initialTodayTasks={todayTasks}
+          initialAvailableHours={availableHours}
+          date={date}
+          client:load
+        />
+      </div>
+    </div>
+  </div>
+</Layout>
