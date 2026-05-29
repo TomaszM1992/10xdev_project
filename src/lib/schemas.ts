@@ -18,7 +18,7 @@ export const UpdateTaskSchema = z.object({
 });
 
 export const UpdateSettingsSchema = z.object({
-  available_hours: z.number().positive().max(24),
+  available_hours: z.number().min(0.25).max(24),
 });
 
 export type CreateTaskInput = z.infer<typeof CreateTaskSchema>;

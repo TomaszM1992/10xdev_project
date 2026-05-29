@@ -60,7 +60,7 @@ export const PATCH: APIRoute = async (context) => {
 
   const { error } = await supabase
     .from("user_settings")
-    .upsert({ user_id: user.id, available_hours: parsed.data.available_hours });
+    .upsert({ user_id: user.id, available_hours: parsed.data.available_hours }, { onConflict: "user_id" });
 
   if (error) {
     return Response.json({ error: "Failed to update settings" }, { status: 500 });

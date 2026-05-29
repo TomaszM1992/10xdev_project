@@ -17,9 +17,14 @@ export function DailyView({ initialOverdueTasks, initialTodayTasks, initialAvail
   const [availableHours, setAvailableHours] = useState(initialAvailableHours);
 
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isMounted = useRef(false);
 
-  // Debounced PATCH to /api/settings whenever availableHours changes
+  // Debounced PATCH to /api/settings whenever availableHours changes (skips initial mount)
   useEffect(() => {
+    if (!isMounted.current) {
+      isMounted.current = true;
+      return;
+    }
     if (debounceRef.current !== null) clearTimeout(debounceRef.current);
     debounceRef.current = setTimeout(() => {
       void fetch("/api/settings", {

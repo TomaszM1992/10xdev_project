@@ -35,9 +35,10 @@ let todayTasks: TaskWithTags[] = [];
 let availableHours = 8;
 let serviceUnavailable = false;
 
-if (supabase) {
+const user = Astro.locals.user;
+if (supabase && user) {
   const [settingsResult, overdueResult, todayResult] = await Promise.all([
-    supabase.from("user_settings").select("available_hours").maybeSingle(),
+    supabase.from("user_settings").select("available_hours").eq("user_id", user.id).maybeSingle(),
     supabase
       .from("tasks")
       .select("*, task_tags(*)")

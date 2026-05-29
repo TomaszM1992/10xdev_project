@@ -1,4 +1,5 @@
 import { CircleCheck, CircleX } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { TaskWithTags } from "@/types";
 
@@ -50,24 +51,28 @@ export function TaskCard({ task, isOverdue = false, onStatusChange }: TaskCardPr
           )}
         </div>
         <div className="flex shrink-0 items-center gap-1">
-          <button
+          <Button
+            variant="ghost"
+            size="icon"
             onClick={() => {
               onStatusChange(task, "complete");
             }}
             aria-label="Complete task"
-            className="rounded-md p-1.5 text-green-400 transition-colors hover:bg-green-400/10 hover:text-green-300"
+            className="text-green-400 hover:bg-green-400/10 hover:text-green-300"
           >
             <CircleCheck className="size-5" />
-          </button>
-          <button
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
             onClick={() => {
               onStatusChange(task, "dismissed");
             }}
             aria-label="Dismiss task"
-            className="rounded-md p-1.5 text-red-400 transition-colors hover:bg-red-400/10 hover:text-red-300"
+            className="text-red-400 hover:bg-red-400/10 hover:text-red-300"
           >
             <CircleX className="size-5" />
-          </button>
+          </Button>
         </div>
       </div>
     </div>
