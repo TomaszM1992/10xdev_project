@@ -37,8 +37,27 @@ export const PATCH: APIRoute = async (context) => {
   // Zod has validated the data; cast to inferred type to satisfy strict no-unsafe-assignment
   const { tags, ...scalarFields } = parsed.data;
 
+  const { data: existing, error: ownershipError } = await supabase
+    .from("tasks")
+    .select("id")
+    .eq("id", id)
+    .eq("user_id", user.id)
+    .maybeSingle();
+
+  if (ownershipError) {
+    return Response.json({ error: "Failed to fetch task" }, { status: 500 });
+  }
+
+  if (!existing) {
+    return Response.json({ error: "Task not found" }, { status: 404 });
+  }
+
   if (Object.keys(scalarFields).length > 0) {
-    const { error: updateError } = await supabase.from("tasks").update(scalarFields).eq("id", id);
+    const { error: updateError } = await supabase
+      .from("tasks")
+      .update(scalarFields)
+      .eq("id", id)
+      .eq("user_id", user.id);
 
     if (updateError) {
       return Response.json({ error: "Failed to update task" }, { status: 500 });
@@ -93,7 +112,11 @@ export const DELETE: APIRoute = async (context) => {
     return Response.json({ error: "Missing task id" }, { status: 400 });
   }
 
-  const { data: existing } = await supabase.from("tasks").select("id").eq("id", id).single();
+  const { data: existing, error: selectError } = await supabase.from("tasks").select("id").eq("id", id).maybeSingle();
+
+  if (selectError) {
+    return Response.json({ error: "Failed to fetch task" }, { status: 500 });
+  }
 
   if (!existing) {
     return Response.json({ error: "Task not found" }, { status: 404 });

@@ -32,12 +32,13 @@ export const POST: APIRoute = async (context) => {
   // Zod has validated the data; cast to inferred type to satisfy strict no-unsafe-assignment
   const { tags, ...taskFields } = parsed.data;
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const { data: rawTask, error: taskError } = await supabase
+  const insertResult = await supabase
     .from("tasks")
     .insert({ ...taskFields, user_id: user.id })
     .select()
     .single();
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const { data: rawTask, error: taskError } = insertResult;
 
   if (taskError || !rawTask) {
     return Response.json({ error: "Failed to create task" }, { status: 500 });

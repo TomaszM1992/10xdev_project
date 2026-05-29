@@ -14,7 +14,7 @@ if (!supabase) return Astro.redirect("/tasks");
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const { data, error } = await supabase.from("tasks").select("*, task_tags(*)").eq("id", id).single();
 
-if (error ?? !data) return Astro.redirect("/tasks");
+if (error || !data) return Astro.redirect("/tasks");
 
 const task = data as TaskWithTags;
 ---
