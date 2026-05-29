@@ -298,30 +298,30 @@ Two parallel Supabase queries via `Promise.all` minimise SSR latency. `tasks_use
 
 #### Automated
 
-- [x] 2.1 npm run lint — clean
-- [x] 2.2 npm run build — clean
+- [x] 2.1 npm run lint — clean — b1956b9
+- [x] 2.2 npm run build — clean — b1956b9
 
 #### Manual
 
-- [x] 2.3 /daily shows today's tasks in correct priority x time order
-- [x] 2.4 Tasks beyond available-hours budget are not shown
-- [x] 2.5 Overdue tasks appear above today's tasks with distinct visual treatment
-- [x] 2.6 /daily?date=YYYY-MM-DD shows tasks for that date
-- [x] 2.7 Prev/next links navigate to adjacent dates
-- [x] 2.8 Empty state renders when no tasks exist for the selected date
+- [x] 2.3 /daily shows today's tasks in correct priority x time order — b1956b9
+- [x] 2.4 Tasks beyond available-hours budget are not shown — b1956b9
+- [x] 2.5 Overdue tasks appear above today's tasks with distinct visual treatment — b1956b9
+- [x] 2.6 /daily?date=YYYY-MM-DD shows tasks for that date — b1956b9
+- [x] 2.7 Prev/next links navigate to adjacent dates — b1956b9
+- [x] 2.8 Empty state renders when no tasks exist for the selected date — b1956b9
 
 ### Phase 3: React Island — Actions and Settings Editor
 
 #### Automated
 
-- [ ] 3.1 npm run lint — clean
-- [ ] 3.2 npm run build — clean
+- [x] 3.1 npm run lint — clean
+- [x] 3.2 npm run build — clean
 
 #### Manual
 
-- [ ] 3.3 Complete/dismiss removes task immediately with Sonner undo toast
-- [ ] 3.4 Undo within 5 seconds restores the task; no PATCH is fired
-- [ ] 3.5 After 5 seconds task remains removed; status persists after reload
-- [ ] 3.6 Changing available hours re-filters task list immediately
-- [ ] 3.7 Changed hours persist after page reload
-- [ ] 3.8 Completed/dismissed tasks do not reappear on next page load
+- [x] 3.3 Complete/dismiss removes task immediately with Sonner undo toast
+- [x] 3.4 Undo within 5 seconds restores the task; no PATCH is fired
+- [x] 3.5 After 5 seconds task remains removed; status persists after reload
+- [x] 3.6 Changing available hours re-filters task list immediately
+- [x] 3.7 Changed hours persist after page reload
+- [x] 3.8 Completed/dismissed tasks do not reappear on next page load
