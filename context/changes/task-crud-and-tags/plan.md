@@ -401,25 +401,25 @@ The task list query uses `tasks_user_id_idx ON tasks(user_id)` (F-01) for the RL
 
 #### Automated
 
-- [x] 2.1 `npm run lint` — no lint errors
-- [x] 2.2 `npm run build` — no type errors
+- [x] 2.1 `npm run lint` — no lint errors — ac57b9f
+- [x] 2.2 `npm run build` — no type errors — ac57b9f
 
 #### Manual
 
-- [x] 2.3 `POST /api/tasks` with valid body + session → 201 with task + tags
-- [x] 2.4 `POST /api/tasks` without session → 401
-- [x] 2.5 `POST /api/tasks` with missing `name` → 400 with validation error
-- [x] 2.6 `PATCH /api/tasks/[id]` with updated fields → 200 with updated task
-- [x] 2.7 `PATCH /api/tasks/[id]` with new tags list → 200; tags replaced
-- [x] 2.8 `DELETE /api/tasks/[id]` → 204; task gone
-- [x] 2.9 `DELETE /api/tasks/[id]` for another user's task → 404
+- [x] 2.3 `POST /api/tasks` with valid body + session → 201 with task + tags — ac57b9f
+- [x] 2.4 `POST /api/tasks` without session → 401 — ac57b9f
+- [x] 2.5 `POST /api/tasks` with missing `name` → 400 with validation error — ac57b9f
+- [x] 2.6 `PATCH /api/tasks/[id]` with updated fields → 200 with updated task — ac57b9f
+- [x] 2.7 `PATCH /api/tasks/[id]` with new tags list → 200; tags replaced — ac57b9f
+- [x] 2.8 `DELETE /api/tasks/[id]` → 204; task gone — ac57b9f
+- [x] 2.9 `DELETE /api/tasks/[id]` for another user's task → 404 — ac57b9f
 
 ### Phase 3: React Components
 
 #### Automated
 
-- [ ] 3.1 `npm run lint` — no lint or type errors in component files
-- [ ] 3.2 `npm run build` — build succeeds
+- [x] 3.1 `npm run lint` — no lint or type errors in component files
+- [x] 3.2 `npm run build` — build succeeds
 
 #### Manual
 
