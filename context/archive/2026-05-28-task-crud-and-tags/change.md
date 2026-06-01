@@ -1,10 +1,10 @@
 ---
 change_id: task-crud-and-tags
 title: Build task CRUD UI with tag support
-status: impl_reviewed
+status: archived
 created: 2026-05-28
-updated: 2026-05-29
-archived_at: null
+updated: 2026-06-01
+archived_at: 2026-06-01T00:00:00Z
 ---
 
 ## Notes
