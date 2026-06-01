@@ -55,4 +55,16 @@ describe("applyBudgetFilter", () => {
     const result = applyBudgetFilter(tasks, 0);
     expect(result.size).toBe(0);
   });
+
+  it("skips tasks with null or non-finite time_estimate_minutes", () => {
+    const nullTask = makeTask("null", null as unknown as number);
+    const nanTask = makeTask("nan", NaN);
+    const negTask = makeTask("neg", -10);
+    const validTask = makeTask("valid", 30);
+    const result = applyBudgetFilter([nullTask, nanTask, negTask, validTask], 2);
+    expect(result.has("null")).toBe(false);
+    expect(result.has("nan")).toBe(false);
+    expect(result.has("neg")).toBe(false);
+    expect(result.has("valid")).toBe(true);
+  });
 });

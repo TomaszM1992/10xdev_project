@@ -32,3 +32,6 @@ pnpm-debug.log*
 .claude/skills
 .claude/prompts
 .claude/.10x-cli-manifest.json
+# stryker temp files
+.stryker-tmp
+reports

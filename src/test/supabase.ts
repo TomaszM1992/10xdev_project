@@ -10,6 +10,10 @@ export async function signInTestUser(): Promise<SupabaseClient> {
     throw new Error("Missing required env vars in .env.test");
   }
 
+  if (!url.startsWith("http://127.0.0.1")) {
+    throw new Error(`Refusing to run integration tests against non-local Supabase: ${url}`);
+  }
+
   const client = createClient(url, anonKey);
   const { error } = await client.auth.signInWithPassword({ email, password });
   if (error) throw error;

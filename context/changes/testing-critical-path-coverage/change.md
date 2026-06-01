@@ -1,7 +1,7 @@
 ---
 change_id: testing-critical-path-coverage
 title: Testing critical path coverage
-status: implemented
+status: impl_reviewed
 created: 2026-06-01
 updated: 2026-06-01
 archived_at: null

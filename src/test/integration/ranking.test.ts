@@ -8,6 +8,7 @@ describe("ranking and budget", () => {
   let client: SupabaseClient;
   let userId: string;
   let taskA: Task, taskB: Task, taskC: Task, taskD: Task, taskE: Task;
+  let setupComplete = false;
 
   beforeAll(async () => {
     client = await signInTestUser();
@@ -28,6 +29,7 @@ describe("ranking and budget", () => {
         })
         .select()
         .single();
+      if (result.error) throw result.error;
       return result.data as Task;
     };
 
@@ -36,9 +38,11 @@ describe("ranking and budget", () => {
     taskC = await insert(1, 60);
     taskD = await insert(2, 30);
     taskE = await insert(1, 5);
+    setupComplete = true;
   });
 
   afterAll(async () => {
+    if (!setupComplete) return;
     await cleanupTestTasks(client);
   });
 
