@@ -20,6 +20,9 @@ Managing daily agenda priorities is tricky which results in a lot of todo tasks 
 - 3rd party calendar integration (google, microsoft)
 - habits tracking
 - account removal flow
+- landing page
+- Completed tasks archived, not polluting Tasks section
+- Creation date
 
 ### success criteria
 - 60% of tasks planned are being completed instead of being dismissed 

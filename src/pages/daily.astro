@@ -45,14 +45,16 @@ if (supabase && user) {
       .eq("status", "pending")
       .lt("target_date", overdueThreshold)
       .order("priority", { ascending: true })
-      .order("time_estimate_minutes", { ascending: true }),
+      .order("time_estimate_minutes", { ascending: true })
+      .order("created_at", { ascending: true }),
     supabase
       .from("tasks")
       .select("*, task_tags(*)")
       .eq("status", "pending")
       .eq("target_date", date)
       .order("priority", { ascending: true })
-      .order("time_estimate_minutes", { ascending: true }),
+      .order("time_estimate_minutes", { ascending: true })
+      .order("created_at", { ascending: true }),
   ]);
 
   availableHours = (settingsResult.data?.available_hours as number | null | undefined) ?? 8;
