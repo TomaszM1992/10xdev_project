@@ -398,11 +398,11 @@ Phase 1 modifies the production ORDER BY in `daily.astro`. The change is additiv
 
 #### Automated
 
-- [x] 3.1 `npm test` reports all integration tests passing (persistence, date-filter, ranking)
-- [x] 3.2 `npm run lint` passes
+- [x] 3.1 `npm test` reports all integration tests passing (persistence, date-filter, ranking) — ea9219f
+- [x] 3.2 `npm run lint` passes — ea9219f
 
 #### Manual
 
-- [x] 3.3 Second consecutive `npm test` run passes (cleanup is working)
-- [x] 3.4 `tasks` table is empty in Supabase Studio after the test run
-- [x] 3.5 Update `context/foundation/test-plan.md` Phase 1 status to `complete`
+- [x] 3.3 Second consecutive `npm test` run passes (cleanup is working) — ea9219f
+- [x] 3.4 `tasks` table is empty in Supabase Studio after the test run — ea9219f
+- [x] 3.5 Update `context/foundation/test-plan.md` Phase 1 status to `complete` — ea9219f
