@@ -3,7 +3,7 @@ project: Todoer
 version: 1
 status: draft
 created: 2026-05-25
-updated: 2026-05-25
+updated: 2026-06-01
 prd_version: 1
 main_goal: speed
 top_blocker: time
@@ -29,9 +29,9 @@ This is the north star — the smallest end-to-end slice whose delivery proves t
 
 | ID   | Change ID              | Outcome (user can …)                                                                                        | Prerequisites | PRD refs                                      | Status   |
 |------|------------------------|-------------------------------------------------------------------------------------------------------------|---------------|-----------------------------------------------|----------|
-| F-01 | task-data-schema       | (foundation) tasks, task_tags, and user_settings tables with RLS live; Supabase connected; auth verified    | —             | FR-001, FR-002, FR-003, FR-004, FR-009, US-01 | ready    |
-| S-01 | task-crud-and-tags     | create, edit, and delete tasks with name, date, priority (1–3), time estimate, and up to 5 tags             | F-01          | FR-004, FR-005, FR-006, FR-009                | proposed |
-| S-02 | daily-prioritized-view | see today's tasks ranked by priority × time fit, complete or dismiss them, navigate to adjacent dates       | S-01          | US-01, FR-007, FR-008, FR-011, FR-012         | proposed |
+| F-01 | task-data-schema       | (foundation) tasks, task_tags, and user_settings tables with RLS live; Supabase connected; auth verified    | —             | FR-001, FR-002, FR-003, FR-004, FR-009, US-01 | done     |
+| S-01 | task-crud-and-tags     | create, edit, and delete tasks with name, date, priority (1–3), time estimate, and up to 5 tags             | F-01          | FR-004, FR-005, FR-006, FR-009                | done     |
+| S-02 | daily-prioritized-view | see today's tasks ranked by priority × time fit, complete or dismiss them, navigate to adjacent dates       | S-01          | US-01, FR-007, FR-008, FR-011, FR-012         | done     |
 
 ## Baseline
 
@@ -58,7 +58,7 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **Blockers:** —
 - **Unknowns:** Local Supabase requires Docker (`npx supabase start`); if Docker is unavailable, use a Supabase cloud project directly — Owner: user. Block: no (cloud fallback available).
 - **Risk:** Every slice in this roadmap depends on this foundation. Supabase migrations must enable RLS on every table and write separate policies per role per operation (per CLAUDE.md convention) — skipping RLS would violate the user-isolation NFR ("no authenticated user can read, write, or modify another user's tasks").
-- **Status:** ready
+- **Status:** done
 
 ## Slices
 
@@ -72,7 +72,7 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **Blockers:** —
 - **Unknowns:** —
 - **Risk:** Core data entry path; S-02 cannot be verified without real tasks in the database. Time estimate and priority fields are the inputs to the ranking algorithm in S-02 — if the creation form omits or allows invalid values, the north star slice cannot be validated end-to-end.
-- **Status:** proposed
+- **Status:** done
 
 ### S-02: Daily prioritized view (north star)
 
@@ -86,7 +86,7 @@ Foundations below assume these are present and do NOT re-scaffold them.
   - What should "available hours" default to on first login before the user sets a value? — Owner: user. Block: no (can default to 8 hours; user can adjust on the view).
   - Will the priority × time sort and filter exceed Cloudflare Workers' 10ms free-tier CPU limit? — Owner: user. Block: no (push sort + filter to SQL ORDER BY / WHERE in Supabase query rather than JavaScript; documented as a known risk in `context/foundation/infrastructure.md`).
 - **Risk:** North star slice; this is the first end-to-end test of the ranking hypothesis. Sort logic must live in SQL (not server-side JS) to stay within the Workers CPU budget. Test with a representative dataset of 50–200 tasks before treating the slice as complete.
-- **Status:** proposed
+- **Status:** done
 
 ## Backlog Handoff
 
@@ -114,4 +114,6 @@ _(none)_
 
 ## Done
 
-(Empty on first generation. `/10x-archive` appends an entry here — and flips that item's `Status` to `done` — when a change whose `Change ID` matches the item is archived.)
+- **F-01: (foundation) tasks, task_tags, and user_settings tables with RLS live; Supabase connected; auth verified** — Archived 2026-06-01 → `context/archive/2026-05-27-task-data-schema/`. Lesson: —.
+- **S-01: user can create, edit, and delete tasks with name, target date, priority (1–3), time estimate, and up to 5 tags; tasks survive between sessions** — Archived 2026-06-01 → `context/archive/2026-05-28-task-crud-and-tags/`. Lesson: —.
+- **S-02: user can view tasks for today ranked by priority × time fit within declared available hours, mark tasks complete or dismissed, navigate to the previous/next day, and see overdue tasks visually distinct from same-day tasks** — Archived 2026-06-01 → `context/archive/2026-05-29-daily-prioritized-view/`. Lesson: —.
