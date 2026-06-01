@@ -3,7 +3,7 @@ project: Todoer
 version: 1
 status: draft
 created: 2026-05-25
-updated: 2026-05-25
+updated: 2026-06-01
 prd_version: 1
 main_goal: speed
 top_blocker: time
@@ -29,7 +29,7 @@ This is the north star — the smallest end-to-end slice whose delivery proves t
 
 | ID   | Change ID              | Outcome (user can …)                                                                                        | Prerequisites | PRD refs                                      | Status   |
 |------|------------------------|-------------------------------------------------------------------------------------------------------------|---------------|-----------------------------------------------|----------|
-| F-01 | task-data-schema       | (foundation) tasks, task_tags, and user_settings tables with RLS live; Supabase connected; auth verified    | —             | FR-001, FR-002, FR-003, FR-004, FR-009, US-01 | ready    |
+| F-01 | task-data-schema       | (foundation) tasks, task_tags, and user_settings tables with RLS live; Supabase connected; auth verified    | —             | FR-001, FR-002, FR-003, FR-004, FR-009, US-01 | done     |
 | S-01 | task-crud-and-tags     | create, edit, and delete tasks with name, date, priority (1–3), time estimate, and up to 5 tags             | F-01          | FR-004, FR-005, FR-006, FR-009                | proposed |
 | S-02 | daily-prioritized-view | see today's tasks ranked by priority × time fit, complete or dismiss them, navigate to adjacent dates       | S-01          | US-01, FR-007, FR-008, FR-011, FR-012         | proposed |
 
@@ -58,7 +58,7 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **Blockers:** —
 - **Unknowns:** Local Supabase requires Docker (`npx supabase start`); if Docker is unavailable, use a Supabase cloud project directly — Owner: user. Block: no (cloud fallback available).
 - **Risk:** Every slice in this roadmap depends on this foundation. Supabase migrations must enable RLS on every table and write separate policies per role per operation (per CLAUDE.md convention) — skipping RLS would violate the user-isolation NFR ("no authenticated user can read, write, or modify another user's tasks").
-- **Status:** ready
+- **Status:** done
 
 ## Slices
 
@@ -114,4 +114,4 @@ _(none)_
 
 ## Done
 
-(Empty on first generation. `/10x-archive` appends an entry here — and flips that item's `Status` to `done` — when a change whose `Change ID` matches the item is archived.)
+- **F-01: (foundation) tasks, task_tags, and user_settings tables with RLS live; Supabase connected; auth verified** — Archived 2026-06-01 → `context/archive/2026-05-27-task-data-schema/`. Lesson: —.
