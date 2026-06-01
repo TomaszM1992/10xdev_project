@@ -16,7 +16,9 @@ describe("CreateTaskSchema", () => {
 
   it("accepts a payload with no tags (defaults to [])", () => {
     const { tags: _, ...noTags } = validCreate;
-    expect(CreateTaskSchema.safeParse(noTags).success).toBe(true);
+    const result = CreateTaskSchema.safeParse(noTags);
+    expect(result.success).toBe(true);
+    expect(result.success && result.data.tags).toEqual([]);
   });
 
   it("rejects missing name", () => {
@@ -56,6 +58,10 @@ describe("UpdateTaskSchema", () => {
     expect(UpdateTaskSchema.safeParse({}).success).toBe(true);
   });
 
+  it("accepts priority 1", () => {
+    expect(UpdateTaskSchema.safeParse({ priority: 1 }).success).toBe(true);
+  });
+
   it("rejects priority 0", () => {
     expect(UpdateTaskSchema.safeParse({ priority: 0 }).success).toBe(false);
   });
@@ -78,6 +84,10 @@ describe("UpdateTaskSchema", () => {
 
   it("accepts omitted status (optional)", () => {
     expect(UpdateTaskSchema.safeParse({ name: "No status" }).success).toBe(true);
+  });
+
+  it("accepts valid tags array", () => {
+    expect(UpdateTaskSchema.safeParse({ tags: ["work"] }).success).toBe(true);
   });
 });
 
