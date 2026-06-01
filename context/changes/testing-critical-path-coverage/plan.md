@@ -385,24 +385,24 @@ Phase 1 modifies the production ORDER BY in `daily.astro`. The change is additiv
 
 #### Automated
 
-- [x] 2.1 `npm test` reports 6 passing unit tests, 0 failing
-- [x] 2.2 `npm run lint` passes on new files
-- [x] 2.3 No TypeScript errors in `src/test/` or `src/lib/daily.ts`
+- [x] 2.1 `npm test` reports 6 passing unit tests, 0 failing — 1da1596
+- [x] 2.2 `npm run lint` passes on new files — 1da1596
+- [x] 2.3 No TypeScript errors in `src/test/` or `src/lib/daily.ts` — 1da1596
 
 #### Manual
 
-- [x] 2.4 `supabase start` + `npm test` runs without env-var or connection errors
-- [x] 2.5 Test user `test@example.com` appears in Supabase Studio auth table
+- [x] 2.4 `supabase start` + `npm test` runs without env-var or connection errors — 1da1596
+- [x] 2.5 Test user `test@example.com` appears in Supabase Studio auth table — 1da1596
 
 ### Phase 3: Integration Tests
 
 #### Automated
 
-- [ ] 3.1 `npm test` reports all integration tests passing (persistence, date-filter, ranking)
-- [ ] 3.2 `npm run lint` passes
+- [x] 3.1 `npm test` reports all integration tests passing (persistence, date-filter, ranking)
+- [x] 3.2 `npm run lint` passes
 
 #### Manual
 
-- [ ] 3.3 Second consecutive `npm test` run passes (cleanup is working)
-- [ ] 3.4 `tasks` table is empty in Supabase Studio after the test run
-- [ ] 3.5 Update `context/foundation/test-plan.md` Phase 1 status to `complete`
+- [x] 3.3 Second consecutive `npm test` run passes (cleanup is working)
+- [x] 3.4 `tasks` table is empty in Supabase Studio after the test run
+- [x] 3.5 Update `context/foundation/test-plan.md` Phase 1 status to `complete`

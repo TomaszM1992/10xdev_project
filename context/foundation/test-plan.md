@@ -6,7 +6,7 @@
 >
 > Refresh: re-run `/10x-test-plan --refresh` when stale (see §8).
 >
-> Last updated: 2026-06-01 (Phase 1 planned)
+> Last updated: 2026-06-01 (Phase 1 complete)
 
 ## 1. Strategy
 
@@ -69,7 +69,7 @@ orchestrator updates Status as artifacts appear on disk.
 
 | # | Phase name | Goal (one line) | Risks covered | Test types | Status | Change folder |
 |---|---|---|---|---|---|---|
-| 1 | Critical-path coverage | Prove task persistence, date assignment correctness, and ranking edge cases | #1, #2, #3 | integration + unit | planned | context/changes/testing-critical-path-coverage/ |
+| 1 | Critical-path coverage | Prove task persistence, date assignment correctness, and ranking edge cases | #1, #2, #3 | integration + unit | complete | context/changes/testing-critical-path-coverage/ |
 | 2 | Interaction & isolation coverage | Prove user isolation (IDOR), undo state machine, settings persistence, and API input validation | #4, #5, #6, #7 | integration + unit | not started | — |
 | 3 | CI quality gate | Wire `npm test` into CI and make Phases 1+2 coverage permanent | cross-cutting | gates (CI config) | not started | — |
 
@@ -115,11 +115,40 @@ relevant rollout phase ships; before that, the sub-section reads "TBD."
 
 ### 6.1 Adding a unit test
 
-TBD — see §3 Phase 1. Reference pattern will be the budget-filter unit test shipped in that phase.
+Place the file next to the module under test (e.g., `src/lib/foo.test.ts`). Import `describe`, `it`, `expect` from `vitest` explicitly (no globals). Construct plain objects that satisfy the relevant TypeScript types — no Supabase, no async. Reference: `src/lib/daily.test.ts` (6 cases for `applyBudgetFilter`).
 
 ### 6.2 Adding an integration test
 
-TBD — see §3 Phase 1. Pattern will cover: test session setup, real (or seeded) Supabase connection, request → response → side-effect assertion shape, and teardown.
+Place the file under `src/test/integration/`. Standard shape:
+
+```typescript
+import { beforeAll, afterEach, describe, it, expect } from "vitest";
+import type { SupabaseClient } from "@supabase/supabase-js";
+import type { Task } from "@/types";
+import { signInTestUser, cleanupTestTasks } from "../supabase";
+
+describe("my feature", () => {
+  let client: SupabaseClient;
+  let userId: string;
+
+  beforeAll(async () => {
+    client = await signInTestUser();
+    const { data } = await client.auth.getUser();
+    userId = data.user.id;
+    await cleanupTestTasks(client);   // pre-clean from any prior run
+  });
+
+  afterEach(async () => { await cleanupTestTasks(client); });
+
+  it("...", async () => {
+    const result = await client.from("tasks").insert({ user_id: userId, ... }).select().single();
+    const row = result.data as Task;   // cast away `any`
+    // assertions
+  });
+});
+```
+
+Use `afterAll` instead of `afterEach` when fixtures are shared across tests in a suite (see `ranking.test.ts`). Tests run sequentially across files (`fileParallelism: false` in `vitest.config.ts`) to prevent DB interference.
 
 ### 6.3 Adding a test for a new API endpoint
 
