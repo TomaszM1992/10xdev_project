@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { toast } from "sonner";
 import { TaskCard } from "./TaskCard";
 import { AvailableHoursInput } from "./AvailableHoursInput";
+import { applyBudgetFilter } from "@/lib/daily";
 import type { TaskWithTags } from "@/types";
 
 interface DailyViewProps {
@@ -39,16 +40,8 @@ export function DailyView({ initialOverdueTasks, initialTodayTasks, initialAvail
   }, [availableHours]);
 
   // Cumulative budget filter — overdue first, then today; SQL ordering is preserved
-  const budgetMinutes = availableHours * 60;
   const all = [...overdueTasks, ...todayTasks];
-  const fittingIds = new Set<string>();
-  let cum = 0;
-  for (const task of all) {
-    if (cum + task.time_estimate_minutes <= budgetMinutes) {
-      fittingIds.add(task.id);
-      cum += task.time_estimate_minutes;
-    }
-  }
+  const fittingIds = applyBudgetFilter(all, availableHours);
 
   const fittingOverdue = overdueTasks.filter((t) => fittingIds.has(t.id));
   const fittingToday = todayTasks.filter((t) => fittingIds.has(t.id));

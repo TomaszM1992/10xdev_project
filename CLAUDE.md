@@ -53,6 +53,47 @@ Full server-side rendering (`output: "server"` in astro.config.mjs). All pages a
 - `wrangler.jsonc` sets `compatibility_date: "2026-05-08"` and `nodejs_compat` flag — do not change without verifying Cloudflare Worker compatibility.
 - Deploy: `npx wrangler deploy` (requires Cloudflare account + `wrangler` auth)
 
+## Testing
+
+### Commands
+
+- `npm test` — run all tests once (`vitest run`)
+- `npx vitest` — run in watch mode during development
+- `npx stryker run` — mutation testing (full scope; prefer `--mutate` to narrow)
+
+### Layout
+
+- **Unit tests**: co-located with source — `src/lib/*.test.ts`
+- **Integration tests**: `src/test/integration/*.test.ts`
+- **Test helpers**: `src/test/`
+  - `global-setup.ts` — creates the test user via Supabase admin API once before all suites
+  - `setup.ts` — loads `.env.test` via dotenv before each test file
+  - `supabase.ts` — `signInTestUser()` (returns authenticated client) and `cleanupTestTasks()` helpers
+
+### Environment
+
+Integration tests require a local Supabase stack (`npx supabase start`). Copy `.env.test.example` to `.env.test` and fill in:
+
+- `SUPABASE_URL` — must be `http://127.0.0.1:…`; the helper refuses to run against any other URL
+- `SUPABASE_ANON_KEY` — anon key for the local stack
+- `SUPABASE_SERVICE_ROLE_KEY` — used by `global-setup.ts` to create the test user
+- `TEST_USER_EMAIL`, `TEST_USER_PASSWORD`
+
+### Conventions
+
+- `fileParallelism: false` in `vitest.config.ts` — test files run serially to prevent DB race conditions; do not override.
+- Integration suites: call `cleanupTestTasks` in both `beforeAll` (pre-seed wipe) and `afterAll` (post-run wipe).
+- No mocking the database — integration tests hit the real local Supabase stack. Mock-based tests masked real migration failures in the past.
+- Unit tests cover pure business logic (e.g. `applyBudgetFilter`); integration tests cover DB behaviour, RLS, and ordering guarantees.
+
+### Mutation testing
+
+Repo uses Stryker for selective mutation testing on risk-critical modules.
+Run it only for code covered by the current change or a risk from test-plan.md,
+prefer narrowed scope with --mutate "path/to/file.ts:start-end", and do not chase
+100% mutation score. Survived mutants should be reviewed one by one: add an
+assertion only when the mutant represents a user-visible or business-relevant bug.
+
 ## CI
 -GitHub Actions workflow (`.github/workflows/ci.yml`) runs lint + build on every push and PR to master. Requires `SUPABASE_URL` and `SUPABASE_KEY` repository -secrets for the build step. 
 @.github/workflows/ci.yml
