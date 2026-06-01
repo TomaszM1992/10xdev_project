@@ -373,26 +373,26 @@ Phase 1 modifies the production ORDER BY in `daily.astro`. The change is additiv
 
 #### Automated
 
-- [x] 1.1 `npm run build` succeeds
-- [x] 1.2 `npm run lint` passes
+- [x] 1.1 `npm run build` succeeds — 8e8dff5
+- [x] 1.2 `npm run lint` passes — 8e8dff5
 
 #### Manual
 
-- [ ] 1.3 Daily view tasks appear in correct order with no visual regression
-- [ ] 1.4 Budget cutoff still excludes tasks exceeding available hours
+- [x] 1.3 Daily view tasks appear in correct order with no visual regression
+- [x] 1.4 Budget cutoff still excludes tasks exceeding available hours
 
 ### Phase 2: Test Infrastructure + Unit Tests
 
 #### Automated
 
-- [ ] 2.1 `npm test` reports 6 passing unit tests, 0 failing
-- [ ] 2.2 `npm run lint` passes on new files
-- [ ] 2.3 No TypeScript errors in `src/test/` or `src/lib/daily.ts`
+- [x] 2.1 `npm test` reports 6 passing unit tests, 0 failing
+- [x] 2.2 `npm run lint` passes on new files
+- [x] 2.3 No TypeScript errors in `src/test/` or `src/lib/daily.ts`
 
 #### Manual
 
-- [ ] 2.4 `supabase start` + `npm test` runs without env-var or connection errors
-- [ ] 2.5 Test user `test@example.com` appears in Supabase Studio auth table
+- [x] 2.4 `supabase start` + `npm test` runs without env-var or connection errors
+- [x] 2.5 Test user `test@example.com` appears in Supabase Studio auth table
 
 ### Phase 3: Integration Tests
 

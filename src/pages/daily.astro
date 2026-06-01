@@ -42,6 +42,7 @@ if (supabase && user) {
     supabase
       .from("tasks")
       .select("*, task_tags(*)")
+      .eq("user_id", user.id)
       .eq("status", "pending")
       .lt("target_date", overdueThreshold)
       .order("priority", { ascending: true })
@@ -50,6 +51,7 @@ if (supabase && user) {
     supabase
       .from("tasks")
       .select("*, task_tags(*)")
+      .eq("user_id", user.id)
       .eq("status", "pending")
       .eq("target_date", date)
       .order("priority", { ascending: true })
@@ -57,9 +59,13 @@ if (supabase && user) {
       .order("created_at", { ascending: true }),
   ]);
 
-  availableHours = (settingsResult.data?.available_hours as number | null | undefined) ?? 8;
-  overdueTasks = (overdueResult.data ?? []) as TaskWithTags[];
-  todayTasks = (todayResult.data ?? []) as TaskWithTags[];
+  if (settingsResult.error || overdueResult.error || todayResult.error) {
+    serviceUnavailable = true;
+  } else {
+    availableHours = (settingsResult.data?.available_hours as number | null | undefined) ?? 8;
+    overdueTasks = overdueResult.data as TaskWithTags[];
+    todayTasks = todayResult.data as TaskWithTags[];
+  }
 } else {
   serviceUnavailable = true;
 }
