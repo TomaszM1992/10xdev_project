@@ -10,7 +10,7 @@ describe("task persistence", () => {
   beforeAll(async () => {
     client = await signInTestUser();
     const { data } = await client.auth.getUser();
-    userId = data.user.id;
+    userId = data.user!.id;
     await cleanupTestTasks(client);
   });
 

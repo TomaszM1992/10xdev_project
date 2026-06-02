@@ -13,7 +13,7 @@ describe("ranking and budget", () => {
   beforeAll(async () => {
     client = await signInTestUser();
     const { data } = await client.auth.getUser();
-    userId = data.user.id;
+    userId = data.user!.id;
     await cleanupTestTasks(client);
 
     const insert = async (priority: 1 | 2 | 3, time_estimate_minutes: number): Promise<Task> => {
