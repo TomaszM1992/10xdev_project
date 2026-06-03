@@ -15,3 +15,7 @@ export function applyBudgetFilter(tasks: Task[], availableHours: number): Fittin
   }
   return fittingIds;
 }
+
+export function restoreAtIndex<T>(arr: T[], idx: number, item: T): T[] {
+  return [...arr.slice(0, idx), item, ...arr.slice(idx)];
+}

@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { toast } from "sonner";
 import { TaskCard } from "./TaskCard";
 import { AvailableHoursInput } from "./AvailableHoursInput";
-import { applyBudgetFilter } from "@/lib/daily";
+import { applyBudgetFilter, restoreAtIndex } from "@/lib/daily";
 import type { TaskWithTags } from "@/types";
 
 interface DailyViewProps {
@@ -56,9 +56,9 @@ export function DailyView({ initialOverdueTasks, initialTodayTasks, initialAvail
     // Splices the task back at its original position using functional state update
     function restore() {
       if (isOverdue) {
-        setOverdueTasks((prev) => [...prev.slice(0, idx), task, ...prev.slice(idx)]);
+        setOverdueTasks((prev) => restoreAtIndex(prev, idx, task));
       } else {
-        setTodayTasks((prev) => [...prev.slice(0, idx), task, ...prev.slice(idx)]);
+        setTodayTasks((prev) => restoreAtIndex(prev, idx, task));
       }
     }
 

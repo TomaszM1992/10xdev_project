@@ -1,0 +1,50 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]: localhost.football113@passmail.com
+      - generic [ref=e6]:
+        - link "Dashboard" [ref=e7] [cursor=pointer]:
+          - /url: /dashboard
+        - link "Tasks" [ref=e8] [cursor=pointer]:
+          - /url: /tasks
+        - link "Daily" [ref=e9] [cursor=pointer]:
+          - /url: /daily
+        - button "Sign out" [ref=e11]
+    - generic [ref=e12]:
+      - heading "10x Astro Starter" [level=1] [ref=e13]
+      - paragraph [ref=e14]: A production-ready starter with authentication, modern tooling, and a cosmic developer experience.
+      - generic [ref=e15]:
+        - link "Sign In" [ref=e16] [cursor=pointer]:
+          - /url: /auth/signin
+        - link "Sign Up" [ref=e17] [cursor=pointer]:
+          - /url: /auth/signup
+    - generic [ref=e18]:
+      - generic [ref=e19]:
+        - img [ref=e20]
+        - heading "Authentication Ready" [level=3] [ref=e23]
+        - paragraph [ref=e24]: Built-in Supabase auth with sign in, sign up, and protected routes out of the box.
+      - generic [ref=e25]:
+        - img [ref=e26]
+        - heading "Modern Stack" [level=3] [ref=e30]
+        - paragraph [ref=e31]: Astro 5, React 19, Tailwind 4, and TypeScript — the latest tools, ready to go.
+      - generic [ref=e32]:
+        - img [ref=e33]
+        - heading "Developer Experience" [level=3] [ref=e36]
+        - paragraph [ref=e37]: ESLint, Prettier, and pre-commit hooks keep your codebase clean from day one.
+  - generic:
+    - region "Notifications alt+T"
+  - generic [ref=e40]:
+    - button "Menu" [ref=e41]:
+      - img [ref=e43]
+      - generic: Menu
+    - button "Inspect" [ref=e47]:
+      - img [ref=e49]
+      - generic: Inspect
+    - button "Audit" [ref=e51]:
+      - generic [ref=e52]:
+        - img [ref=e53]
+        - img [ref=e56]
+      - generic: Audit
+    - button "Settings" [ref=e59]:
+      - img [ref=e61]
+      - generic: Settings
