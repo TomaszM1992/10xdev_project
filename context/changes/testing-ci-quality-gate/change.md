@@ -1,7 +1,7 @@
 ---
 change_id: testing-ci-quality-gate
 title: Wire npm test into CI as a permanent quality gate
-status: implementing
+status: complete
 created: 2026-06-04
 updated: 2026-06-04
 archived_at: null

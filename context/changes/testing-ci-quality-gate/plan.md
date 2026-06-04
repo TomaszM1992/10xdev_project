@@ -224,12 +224,12 @@ to `complete` in the Status column.
 
 #### Automated
 
-- [x] 1.1 `npm run lint` passes
-- [x] 1.2 `npm test` (with Supabase running) passes — all 8 test files green
+- [x] 1.1 `npm run lint` passes — 9a3dd9a
+- [x] 1.2 `npm test` (with Supabase running) passes — all 8 test files green — 9a3dd9a
 
 #### Manual
 
-- [ ] 1.3 Stop Supabase, run `npm test` — integration tests show clear "run npx supabase start" error
-- [ ] 1.4 Push PR branch — `ci` and `test` jobs run in parallel in GitHub Actions
-- [ ] 1.5 `test` job passes in GitHub Actions (all tests green)
-- [ ] 1.6 `deploy` job requires both `ci` and `test`
+- [x] 1.3 Stop Supabase, run `npm test` — integration tests show clear "run npx supabase start" error — 9a3dd9a
+- [x] 1.4 Push PR branch — `ci` and `test` jobs run in parallel in GitHub Actions — 9a3dd9a
+- [x] 1.5 `test` job passes in GitHub Actions (all tests green) — 9a3dd9a
+- [x] 1.6 `deploy` job requires both `ci` and `test` — 9a3dd9a
