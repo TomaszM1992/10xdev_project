@@ -70,7 +70,7 @@ orchestrator updates Status as artifacts appear on disk.
 | # | Phase name | Goal (one line) | Risks covered | Test types | Status | Change folder |
 |---|---|---|---|---|---|---|
 | 1 | Critical-path coverage | Prove task persistence, date assignment correctness, and ranking edge cases | #1, #2, #3 | integration + unit | complete | context/changes/testing-critical-path-coverage/ |
-| 2 | Interaction & isolation coverage | Prove user isolation (IDOR), undo state machine, settings persistence, and API input validation | #4, #5, #6, #7 | integration + unit | implementing | context/changes/testing-interaction-isolation-coverage/ |
+| 2 | Interaction & isolation coverage | Prove user isolation (IDOR), undo state machine, settings persistence, and API input validation | #4, #5, #6, #7 | integration + unit | complete | context/changes/testing-interaction-isolation-coverage/ |
 | 3 | CI quality gate | Wire `npm test` into CI and make Phases 1+2 coverage permanent | cross-cutting | gates (CI config) | not started | — |
 
 **Status vocabulary** (parser literals — do not rename):

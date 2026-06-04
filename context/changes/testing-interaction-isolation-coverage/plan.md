@@ -344,23 +344,23 @@ The undo abort-no-PATCH invariant ("clicking Undo within 5s cancels the in-fligh
 
 #### Automated
 
-- [x] 2.1 `npm test` reports all existing tests plus 5 `restoreAtIndex` unit tests and 4 API validation tests passing
-- [x] 2.2 `npm run lint` passes on `src/lib/daily.test.ts` and `src/test/integration/api-validation.test.ts`
+- [x] 2.1 `npm test` reports all existing tests plus 5 `restoreAtIndex` unit tests and 4 API validation tests passing — 1af4239
+- [x] 2.2 `npm run lint` passes on `src/lib/daily.test.ts` and `src/test/integration/api-validation.test.ts` — 1af4239
 
 #### Manual
 
-- [x] 2.3 `npm test` (without `supabase start`) passes the Phase 2 tests — confirms they do not require a running DB
+- [x] 2.3 `npm test` (without `supabase start`) passes the Phase 2 tests — confirms they do not require a running DB — 1af4239
 
 ### Phase 3: Integration Tests (Risk #4, #5, #6)
 
 #### Automated
 
-- [ ] 3.1 `npm test` (with `supabase start`) reports all tests passing, including 8 new integration cases
-- [ ] 3.2 `npm run lint` passes
+- [x] 3.1 `npm test` (with `supabase start`) reports all tests passing, including 8 new integration cases
+- [x] 3.2 `npm run lint` passes
 
 #### Manual
 
-- [ ] 3.3 Second consecutive `npm test` run passes (cleanup is idempotent)
-- [ ] 3.4 `tasks` and `user_settings` tables are empty in Supabase Studio after a test run
-- [ ] 3.5 Second test user (`test2@example.com`) visible in Supabase Studio auth table
-- [ ] 3.6 Update `context/foundation/test-plan.md` Phase 2 status to `complete`
+- [x] 3.3 Second consecutive `npm test` run passes (cleanup is idempotent)
+- [x] 3.4 `tasks` and `user_settings` tables are empty in Supabase Studio after a test run
+- [x] 3.5 Second test user (`test2@example.com`) visible in Supabase Studio auth table
+- [x] 3.6 Update `context/foundation/test-plan.md` Phase 2 status to `complete`
