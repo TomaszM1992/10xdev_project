@@ -18,7 +18,10 @@ export async function setup() {
   try {
     await fetch(`${url}/health`);
   } catch {
-    console.warn("⚠ Supabase not reachable — integration tests will fail; unit and handler tests will run");
+    process.env.SUPABASE_UNAVAILABLE = "true";
+    console.warn(
+      "⚠ Supabase not reachable — unit tests and handler tests will run; integration tests will skip with a clear error",
+    );
     return;
   }
 

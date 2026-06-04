@@ -1,6 +1,9 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
 async function signIn(emailVar: string, passwordVar: string): Promise<SupabaseClient> {
+  if (process.env.SUPABASE_UNAVAILABLE === "true") {
+    throw new Error("Integration tests require Supabase: run 'npx supabase start' first");
+  }
   const url = process.env.SUPABASE_URL;
   const anonKey = process.env.SUPABASE_ANON_KEY;
   const email = process.env[emailVar];
@@ -29,6 +32,7 @@ export function signInSecondTestUser(): Promise<SupabaseClient> {
 }
 
 export async function cleanupTestTasks(client: SupabaseClient): Promise<void> {
+  if (process.env.SUPABASE_UNAVAILABLE === "true") return;
   const { data, error: userError } = await client.auth.getUser();
   if (userError) throw userError;
 
@@ -37,6 +41,7 @@ export async function cleanupTestTasks(client: SupabaseClient): Promise<void> {
 }
 
 export async function cleanupTestSettings(client: SupabaseClient): Promise<void> {
+  if (process.env.SUPABASE_UNAVAILABLE === "true") return;
   const { data, error: userError } = await client.auth.getUser();
   if (userError) throw userError;
 
