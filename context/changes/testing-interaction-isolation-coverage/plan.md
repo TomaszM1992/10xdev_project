@@ -355,12 +355,12 @@ The undo abort-no-PATCH invariant ("clicking Undo within 5s cancels the in-fligh
 
 #### Automated
 
-- [x] 3.1 `npm test` (with `supabase start`) reports all tests passing, including 8 new integration cases
-- [x] 3.2 `npm run lint` passes
+- [x] 3.1 `npm test` (with `supabase start`) reports all tests passing, including 8 new integration cases — 47a84dc
+- [x] 3.2 `npm run lint` passes — 47a84dc
 
 #### Manual
 
-- [x] 3.3 Second consecutive `npm test` run passes (cleanup is idempotent)
-- [x] 3.4 `tasks` and `user_settings` tables are empty in Supabase Studio after a test run
-- [x] 3.5 Second test user (`test2@example.com`) visible in Supabase Studio auth table
-- [x] 3.6 Update `context/foundation/test-plan.md` Phase 2 status to `complete`
+- [x] 3.3 Second consecutive `npm test` run passes (cleanup is idempotent) — 47a84dc
+- [x] 3.4 `tasks` and `user_settings` tables are empty in Supabase Studio after a test run — 47a84dc
+- [x] 3.5 Second test user (`test2@example.com`) visible in Supabase Studio auth table — 47a84dc
+- [x] 3.6 Update `context/foundation/test-plan.md` Phase 2 status to `complete` — 47a84dc
