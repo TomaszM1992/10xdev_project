@@ -1,10 +1,10 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
-export async function signInTestUser(): Promise<SupabaseClient> {
+async function signIn(emailVar: string, passwordVar: string): Promise<SupabaseClient> {
   const url = process.env.SUPABASE_URL;
   const anonKey = process.env.SUPABASE_ANON_KEY;
-  const email = process.env.TEST_USER_EMAIL;
-  const password = process.env.TEST_USER_PASSWORD;
+  const email = process.env[emailVar];
+  const password = process.env[passwordVar];
 
   if (!url || !anonKey || !email || !password) {
     throw new Error("Missing required env vars in .env.test");
@@ -20,10 +20,26 @@ export async function signInTestUser(): Promise<SupabaseClient> {
   return client;
 }
 
+export function signInTestUser(): Promise<SupabaseClient> {
+  return signIn("TEST_USER_EMAIL", "TEST_USER_PASSWORD");
+}
+
+export function signInSecondTestUser(): Promise<SupabaseClient> {
+  return signIn("TEST_USER2_EMAIL", "TEST_USER2_PASSWORD");
+}
+
 export async function cleanupTestTasks(client: SupabaseClient): Promise<void> {
   const { data, error: userError } = await client.auth.getUser();
   if (userError) throw userError;
 
   const { error } = await client.from("tasks").delete().eq("user_id", data.user.id);
+  if (error) throw error;
+}
+
+export async function cleanupTestSettings(client: SupabaseClient): Promise<void> {
+  const { data, error: userError } = await client.auth.getUser();
+  if (userError) throw userError;
+
+  const { error } = await client.from("user_settings").delete().eq("user_id", data.user.id);
   if (error) throw error;
 }
