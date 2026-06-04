@@ -23,8 +23,37 @@ jobs:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
 
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - run: supabase start
+      - name: Export Supabase test credentials
+        run: |
+          STATUS=$(supabase status --output json)
+          echo "SUPABASE_ANON_KEY=$(echo "$STATUS" | jq -r '.ANON_KEY // .anon_key')" >> $GITHUB_ENV
+          echo "SUPABASE_SERVICE_ROLE_KEY=$(echo "$STATUS" | jq -r '.SERVICE_ROLE_KEY // .service_role_key')" >> $GITHUB_ENV
+      - run: npm test
+        env:
+          SUPABASE_URL: http://127.0.0.1:54321
+          SUPABASE_ANON_KEY: ${{ env.SUPABASE_ANON_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ env.SUPABASE_SERVICE_ROLE_KEY }}
+          TEST_USER_EMAIL: test@example.com
+          TEST_USER_PASSWORD: Test1234!
+          TEST_USER2_EMAIL: test2@example.com
+          TEST_USER2_PASSWORD: Test1234!
+
   deploy:
-    needs: ci
+    needs: [ci, test]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
