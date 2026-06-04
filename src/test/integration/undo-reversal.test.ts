@@ -45,6 +45,10 @@ describe("undo reversal (Risk #5)", () => {
   });
 
   it("PATCH back to 'pending' (undo reversal) restores status", async () => {
+    const pre = await client.from("tasks").select().eq("id", taskId).single();
+    expect(pre.error).toBeNull();
+    expect((pre.data as Task).status).toBe("complete");
+
     const result = await client.from("tasks").update({ status: "pending" }).eq("id", taskId).select().single();
 
     expect(result.error).toBeNull();

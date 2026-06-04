@@ -43,6 +43,7 @@ describe("cross-user isolation (Risk #4)", () => {
   it("RLS hides User A task from User B SELECT", async () => {
     const result = await userBClient.from("tasks").select().eq("id", taskId).maybeSingle();
 
+    expect(result.error).toBeNull();
     expect(result.data).toBeNull();
   });
 
@@ -58,10 +59,13 @@ describe("cross-user isolation (Risk #4)", () => {
   });
 
   it("RLS blocks User B DELETE; task still exists for User A", async () => {
-    await userBClient.from("tasks").delete().eq("id", taskId);
+    const deleteResult = await userBClient.from("tasks").delete().eq("id", taskId).select();
+
+    expect(deleteResult.data).toHaveLength(0);
 
     const refetch = await userAClient.from("tasks").select().eq("id", taskId).maybeSingle();
 
+    expect(refetch.error).toBeNull();
     expect(refetch.data).not.toBeNull();
   });
 });

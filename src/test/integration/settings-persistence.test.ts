@@ -34,7 +34,10 @@ describe("settings persistence (Risk #6)", () => {
   });
 
   it("second upsert updates existing row", async () => {
-    await client.from("user_settings").upsert({ user_id: userId, available_hours: 12 }, { onConflict: "user_id" });
+    const { error: setupError } = await client
+      .from("user_settings")
+      .upsert({ user_id: userId, available_hours: 12 }, { onConflict: "user_id" });
+    expect(setupError).toBeNull();
 
     const { error } = await client
       .from("user_settings")
