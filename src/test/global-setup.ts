@@ -15,6 +15,13 @@ export async function setup() {
     throw new Error("Missing required env vars in .env.test");
   }
 
+  try {
+    await fetch(`${url}/health`);
+  } catch {
+    console.warn("⚠ Supabase not reachable — integration tests will fail; unit and handler tests will run");
+    return;
+  }
+
   const adminClient = createClient(url, serviceRoleKey, {
     auth: { autoRefreshToken: false, persistSession: false },
   });

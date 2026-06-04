@@ -332,24 +332,24 @@ The undo abort-no-PATCH invariant ("clicking Undo within 5s cancels the in-fligh
 
 #### Automated
 
-- [x] 1.1 `npm run build` succeeds with no errors
-- [x] 1.2 `npm run lint` passes on all modified files
-- [x] 1.3 No TypeScript errors in `src/lib/daily.ts`, `src/components/daily/DailyView.tsx`, or `src/test/supabase.ts`
+- [x] 1.1 `npm run build` succeeds with no errors — 05c89f5
+- [x] 1.2 `npm run lint` passes on all modified files — 05c89f5
+- [x] 1.3 No TypeScript errors in `src/lib/daily.ts`, `src/components/daily/DailyView.tsx`, or `src/test/supabase.ts` — 05c89f5
 
 #### Manual
 
-- [x] 1.4 Daily view tasks appear and undo functions identically to before (optimistic removal, restore, and error toast)
+- [x] 1.4 Daily view tasks appear and undo functions identically to before (optimistic removal, restore, and error toast) — 05c89f5
 
 ### Phase 2: Unit Tests + API Validation Test
 
 #### Automated
 
-- [ ] 2.1 `npm test` reports all existing tests plus 5 `restoreAtIndex` unit tests and 4 API validation tests passing
-- [ ] 2.2 `npm run lint` passes on `src/lib/daily.test.ts` and `src/test/integration/api-validation.test.ts`
+- [x] 2.1 `npm test` reports all existing tests plus 5 `restoreAtIndex` unit tests and 4 API validation tests passing
+- [x] 2.2 `npm run lint` passes on `src/lib/daily.test.ts` and `src/test/integration/api-validation.test.ts`
 
 #### Manual
 
-- [ ] 2.3 `npm test` (without `supabase start`) passes the Phase 2 tests — confirms they do not require a running DB
+- [x] 2.3 `npm test` (without `supabase start`) passes the Phase 2 tests — confirms they do not require a running DB
 
 ### Phase 3: Integration Tests (Risk #4, #5, #6)
 

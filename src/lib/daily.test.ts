@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { applyBudgetFilter } from "@/lib/daily";
+import { applyBudgetFilter, restoreAtIndex } from "@/lib/daily";
 import type { Task } from "@/types";
 
 function makeTask(id: string, time_estimate_minutes: number): Task {
@@ -15,6 +15,32 @@ function makeTask(id: string, time_estimate_minutes: number): Task {
     updated_at: "2026-06-01T00:00:00Z",
   };
 }
+
+describe("restoreAtIndex", () => {
+  it("inserts at position 0 (start)", () => {
+    expect(restoreAtIndex([2, 3], 0, 1)).toEqual([1, 2, 3]);
+  });
+
+  it("inserts at last index (end)", () => {
+    expect(restoreAtIndex([1, 2], 2, 3)).toEqual([1, 2, 3]);
+  });
+
+  it("inserts in middle", () => {
+    expect(restoreAtIndex([1, 3], 1, 2)).toEqual([1, 2, 3]);
+  });
+
+  it("inserts into empty array", () => {
+    expect(restoreAtIndex([], 0, "x")).toEqual(["x"]);
+  });
+
+  it("round-trip remove-and-restore preserves order", () => {
+    const original = ["a", "b", "c"];
+    const idx = 1;
+    const removed = original[idx];
+    const withoutB = [...original.slice(0, idx), ...original.slice(idx + 1)];
+    expect(restoreAtIndex(withoutB, idx, removed)).toEqual(original);
+  });
+});
 
 describe("applyBudgetFilter", () => {
   it("includes all tasks when they all fit within budget", () => {

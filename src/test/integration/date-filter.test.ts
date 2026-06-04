@@ -10,7 +10,8 @@ describe("date filter", () => {
   beforeAll(async () => {
     client = await signInTestUser();
     const { data } = await client.auth.getUser();
-    userId = data.user!.id;
+    if (!data.user) throw new Error("Test user not authenticated");
+    userId = data.user.id;
     await cleanupTestTasks(client);
   });
 
