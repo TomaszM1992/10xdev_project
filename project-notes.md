@@ -21,6 +21,7 @@ Managing daily agenda priorities is tricky which results in a lot of todo tasks 
 - habits tracking
 - account removal flow
 - landing page
+- Available hours polish
 - Completed tasks archived, not polluting Tasks section
 - Creation date
 
